@@ -1,12 +1,12 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Download the New Files</title>
+	<title>Upload New File</title>
 	<!-- Bootstrap -->
     <link href="resources/css/bootstrap.min.css" rel="stylesheet" media="screen">
     
@@ -25,17 +25,17 @@
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Drive</a>
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span> <span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="./">Drive</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="./upload">올리기</a></li>
+            <li class="active"><a href="#">올리기</a></li>
             <li><a href="./download">받기</a></li>
           </ul>
         </div><!--/.nav-collapse -->
@@ -45,20 +45,19 @@
     <div class="container">
 
       <div class="message">
-        <h1>Share your file on the web.</h1>
-        
-        <div class="inner-common">
-	        <blockquote class="blockquote-reverse">
-	       		<p>With great power comes great responsibility.</p>
-	       		<footer>Stan Lee in <cite title="Source Title">Spider man</cite></footer>
-	      	</blockquote>
-      	</div>
-        <p class="lead">
-			<span>With great sharing comes great security.<br>Don't forget delete file with responsibility.</span>
-        </p>
+        <h1>Upload your file</h1>
+        <p class="lead">Select the file explore then push trasmit button,<br> or Drag &amp; Drop to below box.</p>
+      </div>
+      
+      <div class="content">
+      	<form class="form-group" action="./upload" method="post" enctype="multipart/form-data">
+      		<label for="exampleInputFile">File select : </label>
+      		<input type="file" id="send_file" name="file" size="100" style="width:500px;" />
+			<button class="btn btn-primary" id="submit_button" type="submit">전송</button>
+		</form>
       </div>
 
-    </div><!-- /.container -->
+	</div><!-- /.container -->
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

@@ -1,5 +1,5 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,12 +31,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Drive</a>
+          <a class="navbar-brand" href="./">Drive</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li><a href="./upload">올리기</a></li>
-            <li><a href="./download">받기</a></li>
+            <li class="active"><a href="#">받기</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -45,17 +45,8 @@
     <div class="container">
 
       <div class="message">
-        <h1>Share your file on the web.</h1>
-        
-        <div class="inner-common">
-	        <blockquote class="blockquote-reverse">
-	       		<p>With great power comes great responsibility.</p>
-	       		<footer>Stan Lee in <cite title="Source Title">Spider man</cite></footer>
-	      	</blockquote>
-      	</div>
-        <p class="lead">
-			<span>With great sharing comes great security.<br>Don't forget delete file with responsibility.</span>
-        </p>
+        <h1>Download your file</h1>
+        <p class="lead">Select the filename for download.<br> Don't forget remove after download for security.</p>
       </div>
 
     </div><!-- /.container -->

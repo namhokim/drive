@@ -1,0 +1,24 @@
+@CHARSET "UTF-8";
+body {
+	padding-top: 50px;
+}
+
+.message {
+	padding: 40px 15px;
+	text-align: center;
+}
+
+.inner-common {
+	padding: 40px 100px
+}
+
+.content {
+	margin-right: 0;
+	margin-left: 0;
+	background-color: #fff;
+	border-color: #ddd;
+	border-width: 1px;
+	border-radius: 4px 4px 0 0;
+	-webkit-box-shadow: none;
+	box-shadow: none
+}
