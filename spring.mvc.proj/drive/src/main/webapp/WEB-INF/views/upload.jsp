@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,11 +51,11 @@
       </div>
       
       <div class="content">
-      	<form class="form-group" action="./upload" method="post" enctype="multipart/form-data">
+      	<form:form modelAttribute="uploadItem" class="form-group" method="POST" enctype="multipart/form-data" action="./upload">
       		<label for="exampleInputFile">File select : </label>
-      		<input type="file" id="send_file" name="file" size="100" style="width:500px;" />
+      		<form:input path="fileData" type="file" id="send_file" name="file" size="100" style="width:500px;" />
 			<button class="btn btn-primary" id="submit_button" type="submit">전송</button>
-		</form>
+		</form:form>
       </div>
 
 	</div><!-- /.container -->
