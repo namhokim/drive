@@ -21,7 +21,7 @@ public class FileListController {
 	@Inject
 	private FileFilter fileFilter;
 
-	@RequestMapping(value = "/download", method = RequestMethod.GET)
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String download(Locale locale, Model model) {
 		
 		File dir = new File(fsResource.getPath());

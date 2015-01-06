@@ -18,6 +18,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 
 @Controller
@@ -41,31 +42,42 @@ public class UploadController {
 		logger.info("upload - POST");
 
 		if (result.hasErrors()) {
-			for (ObjectError error : result.getAllErrors()) {
-				logger.error("{0} - {1}", error.getCode(),
-						error.getDefaultMessage());
-			}
+			errorHandler(result);
 			return "upload";
 		}
 
-		if (!uploadItem.getFileData().isEmpty()) {
-			String filename = uploadItem.getFileData().getOriginalFilename();
-
-			byte[] bytes = uploadItem.getFileData().getBytes();
-			try {
-				File lOutFile = new File(fsResource.getPath() + filename);
-				FileOutputStream lFileOutputStream = new FileOutputStream(
-						lOutFile);
-				lFileOutputStream.write(bytes);
-				lFileOutputStream.close();
-				logger.info("File upload success! - {0}", uploadItem
-						.getFileData().getOriginalFilename());
-			} catch (IOException ie) {
-				logger.error("File writing error! - {0}", ie.getMessage());
-			}
+		CommonsMultipartFile mpf = uploadItem.getFileData();
+		if (!mpf.isEmpty() && uploadProcedure(mpf)) {
+			return "redirect:list";
+		} else {
+			return "upload";
 		}
 	    
-	    return "list";
     }
+	
+	private void errorHandler(BindingResult result)
+	{
+		for (ObjectError error : result.getAllErrors()) {
+			logger.error("{} - {}", error.getCode(), error.getDefaultMessage());
+		}
+	}
+	
+	private boolean uploadProcedure(CommonsMultipartFile multiPartFile) {
+		String filename = multiPartFile.getOriginalFilename();
 
+		byte[] bytes = multiPartFile.getBytes();
+		try {
+			File lOutFile = new File(fsResource.getPath() + filename);
+			FileOutputStream lFileOutputStream = new FileOutputStream(
+					lOutFile);
+			lFileOutputStream.write(bytes);
+			lFileOutputStream.close();
+			logger.info("/upload/{} - Success", filename);
+			return true;
+		} catch (IOException ie) {
+			logger.error("/upload/{} - Failed, {}", filename, ie.getMessage());
+			return false;
+		}
+	}
+	
 }
