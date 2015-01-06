@@ -39,28 +39,31 @@ public class UploadController {
 	public String handleFileUpload(UploadItem uploadItem, BindingResult result){
 		
 		logger.info("upload - POST");
-		
+
 		if (result.hasErrors()) {
 			for (ObjectError error : result.getAllErrors()) {
-				logger.error("{0} - {1}", error.getCode(), error.getDefaultMessage());
+				logger.error("{0} - {1}", error.getCode(),
+						error.getDefaultMessage());
 			}
 			return "upload";
 		}
-	 
-	    if(!uploadItem.getFileData().isEmpty()){
-	        String filename = uploadItem.getFileData().getOriginalFilename();
-	 
-	        byte[] bytes = uploadItem.getFileData().getBytes();
-            try{
+
+		if (!uploadItem.getFileData().isEmpty()) {
+			String filename = uploadItem.getFileData().getOriginalFilename();
+
+			byte[] bytes = uploadItem.getFileData().getBytes();
+			try {
 				File lOutFile = new File(fsResource.getPath() + filename);
-				FileOutputStream lFileOutputStream = new FileOutputStream(lOutFile);
+				FileOutputStream lFileOutputStream = new FileOutputStream(
+						lOutFile);
 				lFileOutputStream.write(bytes);
 				lFileOutputStream.close();
-                 logger.info("File upload success! - {0}", uploadItem.getFileData().getOriginalFilename());
-            }catch(IOException ie){
-            	logger.error("File writing error! - {0}", ie.getMessage());
-            }
-	    }
+				logger.info("File upload success! - {0}", uploadItem
+						.getFileData().getOriginalFilename());
+			} catch (IOException ie) {
+				logger.error("File writing error! - {0}", ie.getMessage());
+			}
+		}
 	    
 	    return "home";
     }
