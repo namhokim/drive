@@ -1,4 +1,4 @@
-package github.namhokim.drive;
+package github.namhokim.drive.controller;
 
 import github.namhokim.drive.domain.UploadItem;
 
@@ -65,7 +65,7 @@ public class UploadController {
 			}
 		}
 	    
-	    return "home";
+	    return "list";
     }
 
 }

@@ -1,4 +1,4 @@
-package github.namhokim.drive;
+package github.namhokim.drive.controller;
 
 import java.util.Locale;
 

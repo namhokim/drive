@@ -34,6 +34,8 @@
             <beans:value>C:/temp/</beans:value>
         </beans:constructor-arg>
     </beans:bean>
+    
+    <beans:bean id="fileFilter" class="github.namhokim.drive.domain.OnlyFileFilter" />
 	
 	
 </beans:beans>
