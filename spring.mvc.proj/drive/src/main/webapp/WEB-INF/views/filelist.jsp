@@ -23,11 +23,11 @@
 					<c:forEach var="listValue" items="${lists}">
 						<li class="list-group-item">
 							<div class="btn-group" role="group" aria-label="file action">
-								<a href="./download/${listValue.name}" class="btn btn-default">
+								<a href="./download/${listValue.name}" class="btn btn-default file">
 									<span class="glyphicon glyphicon-save" aria-hidden="true"></span>
 									${listValue.name}
 								</a>
-								<button type="button" class="btn btn-default">
+								<button type="button" class="btn btn-default removeMe">
 									<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
 								</button>
 						</div>
@@ -41,8 +41,23 @@
 
     <%@include file="commonJs.jsp"%>
     <script>
+    var prefixDownload = './download/';
+    var prefixRemove = './remove/';
+
     $( document ).ready(function() {
     	$('#navDownload').addClass('active');
+    	$('.removeMe').click(function() {
+    		var filename = $(this).prev().attr('href').substr(prefixDownload.length);
+    		//console.log(filename);
+    		$.ajax({
+    			  type: "DELETE",
+    			  url: prefixRemove + filename
+    		}).done(function() {
+    			alert( "Deleted" );
+    		}).fail(function() {
+    			alert( "Cannot Delete" );
+    		});
+    	});
     });
     </script>
 </body>

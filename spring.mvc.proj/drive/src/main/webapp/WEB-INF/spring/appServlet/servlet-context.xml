@@ -39,5 +39,4 @@
     
     <beans:bean id="fileFilter" class="github.namhokim.drive.domain.OnlyFileFilter" />
 	
-	
 </beans:beans>
