@@ -11,6 +11,7 @@
 	</appender>
 	
 	<appender name="dailyfile" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="Encoding" value="UTF-8" />
 		<param name="File" value="logs/drive.log" />
 		<param name="DatePattern" value="'.'yyyy-MM-dd" />
 		<layout class="org.apache.log4j.PatternLayout">
