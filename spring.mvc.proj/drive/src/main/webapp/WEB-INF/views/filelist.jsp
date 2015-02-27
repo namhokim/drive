@@ -23,7 +23,7 @@
 				<c:forEach var="listValue" items="${lists}">
 					<li class="list-group-item">
 					<div class="btn-group" role="group" aria-label="file action">
-						<a href="./download/${listValue.name}" class="btn btn-default file">
+						<a href="./download?filename=${listValue.name}" class="btn btn-default file">
 							<span class="glyphicon glyphicon-save" aria-hidden="true"></span>
 							${listValue.name}
 						</a>
