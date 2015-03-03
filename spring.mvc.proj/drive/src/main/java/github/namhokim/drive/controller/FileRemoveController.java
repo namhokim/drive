@@ -5,6 +5,7 @@ import github.namhokim.drive.domain.Result;
 import java.io.File;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,9 +15,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
@@ -29,14 +30,14 @@ public class FileRemoveController {
 	@Inject
 	private FileSystemResource fsResource;
 	
-	@RequestMapping(value = "/remove/{filename:.*}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/remove", method = RequestMethod.DELETE)
 	@ResponseBody
-	public ResponseEntity<String> remove(@PathVariable String filename) {
+	public ResponseEntity<String> remove(HttpServletRequest request, @RequestParam("filename") String filename) {
 		
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.setContentType(MediaType.APPLICATION_JSON);
 		
-		logger.info("Remove file: {}.", filename);
+		logger.info("{} removed by {}", filename, request.getRemoteAddr());
 		
 		File target = new File(fsResource.getPath() + filename);
 		String message = "";

@@ -58,8 +58,8 @@
 
     <%@include file="commonJs.jsp"%>
     <script>
-    var prefixDownload = './download/';
-    var prefixRemove = './remove/';
+    var prefixDownload = './download?filename=';
+    var prefixRemove = './remove?filename=';
 
     $( document ).ready(function() {
     	$('#navDownload').addClass('active');
@@ -75,7 +75,7 @@
     function removeFile(filename, succeedHook) {
     	$.ajax({
 			  type: "DELETE",
-			  url: prefixRemove + filename
+			  url: prefixRemove + encodeURIComponent(filename)
 		}).done(function(data) {
 			if (data.success) {
 				showMessageBox('Success', '"' + filename + '" was deleted');	

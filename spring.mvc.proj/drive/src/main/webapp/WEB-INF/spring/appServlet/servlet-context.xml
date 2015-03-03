@@ -33,7 +33,7 @@
     <!-- Configure the file upload directory-->
     <beans:bean id="uploadDirResource" class="org.springframework.core.io.FileSystemResource">
         <beans:constructor-arg>
-            <beans:value>F:/drive/</beans:value>
+            <beans:value>C:/drive/</beans:value>
         </beans:constructor-arg>
     </beans:bean>
     

@@ -46,6 +46,10 @@ public class UploadController {
 			return "upload";
 		}
 
+		if (uploadItem==null) {
+			return "upload";
+		}
+		
 		CommonsMultipartFile mpf = uploadItem.getFileData();
 		if (!mpf.isEmpty() && uploadProcedure(mpf)) {
 			return "redirect:list";
