@@ -11,7 +11,7 @@
 
     <div class="container">
       <div class="message">
-        <h1>Share your file on the web.</h1>
+        <h1><span class="glyphicon glyphicon-hdd" aria-hidden="true"></span> Share your file on the web.</h1>
         
         <div class="inner-common">
 	        <blockquote class="blockquote-reverse">
