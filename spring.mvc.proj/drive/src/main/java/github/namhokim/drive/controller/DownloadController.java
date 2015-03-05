@@ -33,7 +33,6 @@ public class DownloadController {
 	public ResponseEntity<InputStreamResource> download(HttpServletRequest request, @RequestParam("filename") String filename) throws IOException {
 		
 		logger.info("{} download by {}", filename, request.getRemoteAddr());
-		logger.info("user agent: {}", request.getHeader ("user-agent"));
 
 		// Java의 java.net.URLEncoder는 공백문자를 %20가 아닌 +로 인코딩한다.
 		// 만약 +로 Content-Disposition를 반환하면 공백이 +로 바뀌어 버린다. 

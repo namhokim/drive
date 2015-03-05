@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.Locale;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,9 +38,7 @@ public class UploadController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public String handleFileUpload(UploadItem uploadItem, BindingResult result){
-		
-		logger.info("upload - POST");
+	public String handleFileUpload(HttpServletRequest request, UploadItem uploadItem, BindingResult result){
 
 		if (result.hasErrors()) {
 			errorHandler(result);
@@ -47,11 +46,12 @@ public class UploadController {
 		}
 
 		if (uploadItem==null) {
+			logger.error("handleFileUpload error, UploadItem was null");
 			return "upload";
 		}
 		
 		CommonsMultipartFile mpf = uploadItem.getFileData();
-		if (!mpf.isEmpty() && uploadProcedure(mpf)) {
+		if (!mpf.isEmpty() && uploadProcedure(mpf, request.getRemoteAddr())) {
 			return "redirect:list";
 		} else {
 			return "upload";
@@ -66,7 +66,7 @@ public class UploadController {
 		}
 	}
 	
-	private boolean uploadProcedure(CommonsMultipartFile multiPartFile) {
+	private boolean uploadProcedure(CommonsMultipartFile multiPartFile, String remoteAddr) {
 		String filename = multiPartFile.getOriginalFilename();
 
 		byte[] bytes = multiPartFile.getBytes();
@@ -76,10 +76,10 @@ public class UploadController {
 					lOutFile);
 			lFileOutputStream.write(bytes);
 			lFileOutputStream.close();
-			logger.info("/upload/{} - Success", filename);
+			logger.info("/upload/{} - Success by {}", filename, remoteAddr);
 			return true;
 		} catch (IOException ie) {
-			logger.error("/upload/{} - Failed, {}", filename, ie.getMessage());
+			logger.error("/upload/{} - Failed, {} by {}", filename, ie.getMessage(), remoteAddr);
 			return false;
 		}
 	}
