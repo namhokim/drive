@@ -76,10 +76,10 @@ public class UploadController {
 					lOutFile);
 			lFileOutputStream.write(bytes);
 			lFileOutputStream.close();
-			logger.info("/upload/{} - Success by {}", filename, remoteAddr);
+			logger.info("{} uploaded by {}", filename, remoteAddr);
 			return true;
 		} catch (IOException ie) {
-			logger.error("/upload/{} - Failed, {} by {}", filename, ie.getMessage(), remoteAddr);
+			logger.error("{} uploadf ailed, {} by {}", filename, ie.getMessage(), remoteAddr);
 			return false;
 		}
 	}
