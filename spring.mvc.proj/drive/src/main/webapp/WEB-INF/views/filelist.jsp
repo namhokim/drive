@@ -24,7 +24,7 @@
 				<c:forEach var="listValue" items="${lists}">
 					<li class="list-group-item">
 					<div class="btn-group" role="group" aria-label="file action">
-						<a href="./download?filename=${listValue.name}" class="btn btn-default file">
+						<a href="./file?filename=${listValue.name}" class="btn btn-default file">
 							<span class="glyphicon glyphicon-save" aria-hidden="true"></span>
 							${listValue.name}
 						</a>
@@ -59,7 +59,7 @@
 
     <%@include file="commonJs.jsp"%>
     <script>
-    var prefixDownload = './download?filename=';
+    var prefixDownload = './file?filename=';
     var prefixRemove = './remove?filename=';
 
     $( document ).ready(function() {

@@ -17,7 +17,7 @@
 		<div id="navbar" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
 				<li id="navUpload"><a href="./upload"><spring:message code="common.menu.upload" /></a></li>
-				<li id="navDownload"><a href="./list"><spring:message code="common.menu.download" /></a></li>
+				<li id="navDownload"><a href="./download"><spring:message code="common.menu.download" /></a></li>
 			</ul>
 		</div>
 		<!--/.nav-collapse -->
