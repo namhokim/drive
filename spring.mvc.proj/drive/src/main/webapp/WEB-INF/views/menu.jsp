@@ -1,3 +1,4 @@
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <nav class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container">
 		<div class="navbar-header">
@@ -15,8 +16,8 @@
 		</div>
 		<div id="navbar" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
-				<li id="navUpload"><a href="./upload">Upload</a></li>
-				<li id="navDownload"><a href="./list">Download</a></li>
+				<li id="navUpload"><a href="./upload"><spring:message code="common.menu.upload" /></a></li>
+				<li id="navDownload"><a href="./list"><spring:message code="common.menu.download" /></a></li>
 			</ul>
 		</div>
 		<!--/.nav-collapse -->

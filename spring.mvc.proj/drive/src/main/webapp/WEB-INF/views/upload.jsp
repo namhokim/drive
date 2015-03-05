@@ -1,11 +1,12 @@
 <%@ page session="false" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>    
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>  
 <!DOCTYPE html>
 <html>
 <head>
 	<%@include file="commonHeader.jsp"%>
-	<title>Upload New File</title>
+	<title><spring:message code="common.title" /></title>
 	<link href="resources/css/upload.css" rel="stylesheet" media="screen">
 </head>
 <body>
@@ -14,21 +15,21 @@
     <div class="container">
 
       <div class="message">
-        <h1><span class="glyphicon glyphicon-send" aria-hidden="true"></span> Upload your file</h1>
-        <p class="lead">Select the file explore then push trasmit button,<br> or Drag &amp; Drop to below box.</p>
+        <h1><span class="glyphicon glyphicon-send" aria-hidden="true"></span> <spring:message code="upload.title" /></h1>
+        <p class="lead"><spring:message code="upload.message" /></p>
       </div>
       
       <div class="content">
       	<form:form modelAttribute="uploadItem" class="form-group" method="POST" enctype="multipart/form-data" action="./upload">
-      		<label for="exampleInputFile">File select : </label>
+      		<label for="exampleInputFile"><spring:message code="upload.fileSelect" /> : </label>
       		<form:input path="fileData" type="file" id="send_file" name="file" size="100" style="width:500px;" />
-			<button class="btn btn-primary" id="submit_button" type="submit">전송</button>
+			<button class="btn btn-primary" id="submit_button" type="submit"><spring:message code="upload.send" /></button>
 		</form:form>
       </div>
       
 		<div id="dnd" class="row">
 			<div class="well">
-				<div id="dragandrophandler"><span>Drag &amp; Drop Files Here</span></div>
+				<div id="dragandrophandler"><span><spring:message code="upload.dragDropBox" /></span></div>
 				<br>
 				<br>
 				<div id="status1"></div>

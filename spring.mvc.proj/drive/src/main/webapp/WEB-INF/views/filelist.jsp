@@ -1,11 +1,12 @@
 <%@ page session="false" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html>
 <head>
 	<%@include file="commonHeader.jsp"%>
-	<title>Download the New Files</title>
+	<title><spring:message code="common.title" /></title>
 </head>
 <body>
 	<%@include file="menu.jsp"%>
@@ -13,8 +14,8 @@
 	<div class="container">
 
       	<div class="message">
-        	<h1><span class="glyphicon glyphicon-list" aria-hidden="true"></span> Download your file</h1>
-        	<p class="lead">Select the filename for download.<br> Don't forget remove after download for security.</p>
+        	<h1><span class="glyphicon glyphicon-list" aria-hidden="true"></span> <spring:message code="download.title" /></h1>
+        	<p class="lead"><spring:message code="download.message" /></p>
       	</div>
       
 		<div class="files">
@@ -44,13 +45,13 @@
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-	        <h4 class="modal-title" id="noticeBoxTitle">모달 제목</h4>
+	        <h4 class="modal-title" id="noticeBoxTitle">modal title</h4>
 	      </div>
 	      <div class="modal-body"  id="noticeBoxMessage">
-	        <p>적절한 본문…</p>
+	        <p>modal message</p>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-primary" data-dismiss="modal">닫기</button>
+	        <button type="button" class="btn btn-primary" data-dismiss="modal"><spring:message code="download.close" /></button>
 	      </div>
 	    </div><!-- /.modal-content -->
 	  </div><!-- /.modal-dialog -->
@@ -78,15 +79,15 @@
 			  url: prefixRemove + encodeURIComponent(filename)
 		}).done(function(data) {
 			if (data.success) {
-				showMessageBox('Success', '"' + filename + '" was deleted');	
+				showMessageBox('<spring:message code="download.success" />', '"' + filename + '" <spring:message code="download.wasDeleted" />');	
 			} else {
-				showMessageBox('Failure', data.reason);
+				showMessageBox('<spring:message code="download.failure" />', data.reason);
 			}
 		}).fail(function(request) {
 			if (request.status === 0) {
-				showMessageBox('Error', 'Cannot connect to server');
+				showMessageBox('<spring:message code="download.error" />', '<spring:message code="download.cannotConnectServer" />');
 			} else {
-				showMessageBox('Error', request.statusText + '(' + request.status + ').');
+				showMessageBox('<spring:message code="download.error" />', request.statusText + '(' + request.status + ').');
 			}
 		});
     }

@@ -22,6 +22,22 @@
 		<beans:property name="contentType" value="text/html; charset=utf-8" />
 	</beans:bean>
 	
+	<!-- i18n -->
+	<beans:bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <beans:property name="basename" value="classpath:i18n/resource" />
+        <beans:property name="defaultEncoding" value="UTF-8" />
+    </beans:bean>
+    <!-- localeResolver가 주석처리가 되어 있으면 브라우저 언어 설정에 의해 로케일이 선택된다.  
+    <beans:bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+    	<beans:property name="defaultLocale" value="en" />
+	</beans:bean>
+    <interceptors>
+        <beans:bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+            <beans:property name="paramName" value="locale" />
+        </beans:bean>
+    </interceptors>
+    -->
+	
 	<context:component-scan base-package="github.namhokim.drive" />
 	
 	<!-- Configure the multipart resolver -->
