@@ -1,5 +1,24 @@
-Test Lists
+ [Revision History]
+ 2014-03-06 1.0.3 ie6/ie7 partial support
+ 2014-03-06 1.0.2 ie8 console.log javascript error ifx
+ 2014-03-06 1.0.1 versioning start with properties
+ 2014-03-05 1.0 start
 
+ 
+ [TODO]
+ 1. 한글 파일 다운로드 에러, UTF-8문제 => 2/24 done
+ 2. 삭제 구현 => 2/25 done
+ 3. 드래그 업로드 => 3/3 done
+ 4. 다국어 (한글+) => 3/5 done
+  resource: http://www.journaldev.com/2610/spring-mvc-internationalization-i18n-and-localization-l10n-example
+ 5. 자동주기삭제
+ 6. 통계
+  - 사용자 IP
+  - IP with map (custom)
+  - 사용기록(log -> db)
+
+  
+[Test]
 아래 동작을 테스트
  1. 업로드
  2. 리스트
@@ -11,17 +30,3 @@ Test Lists
  1. 한글
  2. 공백 포함
  
- Service History
- 2014-03-05 1.0 start
- 
- TODO
- 1. 한글 파일 다운로드 에러, UTF-8문제 => 2/24 done
- 2. 삭제 구현 => 2/25 done
- 3. 드래그 업로드 => 3/3 done
- 4. 다국어 (한글+)
-  resource: http://www.journaldev.com/2610/spring-mvc-internationalization-i18n-and-localization-l10n-example
- 5. 자동주기삭제
- 6. 통계
-  - 사용자 IP
-  - IP with map (custom)
-  - 사용기록(log -> db)
