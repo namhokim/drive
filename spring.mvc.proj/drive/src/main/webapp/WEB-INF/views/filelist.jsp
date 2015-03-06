@@ -66,7 +66,6 @@
     	$('#navDownload').addClass('active');
     	$('.download').each(function(obj) {
     		var filename = $(this).attr('href');
-    		console.log(filename);
     		$(this).attr('href', './file?filename=' + encodeURIComponent(filename))
     	});
     	//console.log(dn.size());
