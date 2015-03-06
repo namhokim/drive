@@ -52,7 +52,7 @@ public class UploadController {
 		
 		CommonsMultipartFile mpf = uploadItem.getFileData();
 		if (!mpf.isEmpty() && uploadProcedure(mpf, request.getRemoteAddr())) {
-			return "redirect:list";
+			return "redirect:download";
 		} else {
 			return "upload";
 		}

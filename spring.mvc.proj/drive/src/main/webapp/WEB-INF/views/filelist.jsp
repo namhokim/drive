@@ -24,11 +24,11 @@
 				<c:forEach var="listValue" items="${lists}">
 					<li class="list-group-item">
 					<div class="btn-group" role="group" aria-label="file action">
-						<a href="./file?filename=${listValue.name}" class="btn btn-default file">
+						<a href="${listValue.name}" class="btn btn-default file download">
 							<span class="glyphicon glyphicon-save" aria-hidden="true"></span>
 							${listValue.name}
 						</a>
-						<button type="button" class="btn btn-default removeMe">
+						<button type="button" class="btn btn-default removeMe" value="${listValue.name}">
 							<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
 						</button>
 					</div>
@@ -56,16 +56,22 @@
 	    </div><!-- /.modal-content -->
 	  </div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->
+	
+	<!-- for javascript File download -->
+	<iframe id=my_iframe style='display:none;'></iframe>
 
     <%@include file="commonJs.jsp"%>
     <script>
-    var prefixDownload = './file?filename=';
-    var prefixRemove = './remove?filename=';
-
     $( document ).ready(function() {
     	$('#navDownload').addClass('active');
+    	$('.download').each(function(obj) {
+    		var filename = $(this).attr('href');
+    		console.log(filename);
+    		$(this).attr('href', './file?filename=' + encodeURIComponent(filename))
+    	});
+    	//console.log(dn.size());
     	$('.removeMe').click(function() {
-    		var filename = $(this).prev().attr('href').substr(prefixDownload.length);
+    		var filename = $(this).val();
     		removeFile(filename);
     		var elemList = $(this).offsetParent().offsetParent(); 
     		elemList.css( "background-color", "#C04848" );
@@ -76,7 +82,7 @@
     function removeFile(filename, succeedHook) {
     	$.ajax({
 			  type: "DELETE",
-			  url: prefixRemove + encodeURIComponent(filename)
+			  url: './remove?filename=' + encodeURIComponent(filename)
 		}).done(function(data) {
 			if (data.success) {
 				showMessageBox('<spring:message code="download.success" />', '"' + filename + '" <spring:message code="download.wasDeleted" />');	
