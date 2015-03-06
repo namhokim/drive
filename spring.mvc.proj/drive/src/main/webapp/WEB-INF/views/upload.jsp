@@ -6,7 +6,7 @@
 <html>
 <head>
 	<%@include file="commonHeader.jsp"%>
-	<title><spring:message code="common.title" /></title>
+	<title><spring:message code="common.title" /> <spring:message code="common.version" /></title>
 	<link href="resources/css/upload.css" rel="stylesheet" media="screen">
 </head>
 <body>

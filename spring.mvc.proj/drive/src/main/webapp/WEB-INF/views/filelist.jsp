@@ -6,7 +6,7 @@
 <html>
 <head>
 	<%@include file="commonHeader.jsp"%>
-	<title><spring:message code="common.title" /></title>
+	<title><spring:message code="common.title" /> <spring:message code="common.version" /></title>
 </head>
 <body>
 	<%@include file="menu.jsp"%>
