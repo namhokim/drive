@@ -20,7 +20,7 @@
       </div>
       
       <div class="content">
-      	<form:form modelAttribute="uploadItem" class="form-group" method="POST" enctype="multipart/form-data" action="./upload">
+      	<form:form modelAttribute="uploadItem" class="form-group" method="POST" enctype="multipart/form-data" action="./file">
       		<label for="exampleInputFile"><spring:message code="upload.fileSelect" /> : </label>
       		<form:input path="fileData" type="file" id="send_file" name="file" size="100" style="width:500px;" />
 			<button class="btn btn-primary" id="submit_button" type="submit"><spring:message code="upload.send" /></button>
@@ -74,7 +74,6 @@
 			alert('Not support browser!');
 			return;
 		}
-		console.log('files: ' + files.length);
 		for (var i = 0; i < files.length; i++) {
 			var fd = new FormData();
 			fd.append('fileData', files[i]);
@@ -128,7 +127,7 @@
 	}
 	
 	function sendFileToServer(formData, status) {
-		var uploadURL = "./upload"; //Upload URL
+		var uploadURL = "./file"; //Upload URL
 		var extraData = {}; //Extra Data.
 		var jqXHR = $.ajax({
 			xhr : function() {

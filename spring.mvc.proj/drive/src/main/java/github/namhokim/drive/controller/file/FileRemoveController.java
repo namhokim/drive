@@ -1,4 +1,4 @@
-package github.namhokim.drive.controller;
+package github.namhokim.drive.controller.file;
 
 import github.namhokim.drive.domain.Result;
 
@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 
 @Controller
+@RequestMapping(value = "/file")
 public class FileRemoveController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(FileRemoveController.class);
@@ -30,7 +31,7 @@ public class FileRemoveController {
 	@Inject
 	private FileSystemResource fsResource;
 	
-	@RequestMapping(value = "/remove", method = RequestMethod.DELETE)
+	@RequestMapping(method = RequestMethod.DELETE)
 	@ResponseBody
 	public ResponseEntity<String> remove(HttpServletRequest request, @RequestParam("filename") String filename) {
 		

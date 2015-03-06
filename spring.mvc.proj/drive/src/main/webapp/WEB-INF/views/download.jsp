@@ -68,7 +68,6 @@
     		var filename = $(this).attr('href');
     		$(this).attr('href', './file?filename=' + encodeURIComponent(filename))
     	});
-    	//console.log(dn.size());
     	$('.removeMe').click(function() {
     		var filename = $(this).val();
     		removeFile(filename);
@@ -81,7 +80,7 @@
     function removeFile(filename, succeedHook) {
     	$.ajax({
 			  type: "DELETE",
-			  url: './remove?filename=' + encodeURIComponent(filename)
+			  url: './file?filename=' + encodeURIComponent(filename)
 		}).done(function(data) {
 			if (data.success) {
 				showMessageBox('<spring:message code="download.success" />', '"' + filename + '" <spring:message code="download.wasDeleted" />');	

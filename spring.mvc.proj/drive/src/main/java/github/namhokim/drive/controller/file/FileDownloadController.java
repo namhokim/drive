@@ -1,10 +1,7 @@
-package github.namhokim.drive.controller;
+package github.namhokim.drive.controller.file;
 
-import java.io.File;
-import java.io.FileFilter;
 import java.io.IOException;
 import java.net.URLEncoder;
-import java.util.Locale;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -18,32 +15,21 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class DownloadController {
-	
-	private static final Logger logger = LoggerFactory.getLogger(DownloadController.class);
+@RequestMapping(value = "/file")
+public class FileDownloadController {
+
+private static final Logger logger = LoggerFactory.getLogger(FileDownloadController.class);
 	
 	@Inject
 	private FileSystemResource fsResource;
 	
-	@Inject
-	private FileFilter fileFilter;
-	
-	@RequestMapping(value = "/download", method = RequestMethod.GET)
-	public String download(Locale locale, Model model) {
-		
-		File dir = new File(fsResource.getPath());
-		model.addAttribute("lists", dir.listFiles(fileFilter));
-		return "filelist";
-	}
-
-	@RequestMapping(method = RequestMethod.GET, value = "/file")
+	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<InputStreamResource> download(HttpServletRequest request, @RequestParam("filename") String filename) throws IOException {
 		
@@ -59,7 +45,7 @@ public class DownloadController {
 		responseHeaders.set("Content-Transfer-Encoding", "binary");
 		return new ResponseEntity<InputStreamResource>(getFileContent(filename), responseHeaders, HttpStatus.OK);
 	}
-		
+	
 	private InputStreamResource getFileContent(String filename) throws IOException {
 		String path = String.format("%s%s", fsResource.getPath(), filename);
 		FileSystemResource resource = new FileSystemResource(path);
