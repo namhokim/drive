@@ -41,7 +41,9 @@ private static final Logger logger = LoggerFactory.getLogger(FileDownloadControl
 		
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-		responseHeaders.set("Content-Disposition", "attachment;filename=" + encordedFilename + ";");
+		// See. RFC-6266, http://www.rfc-base.org/txt/rfc-6266.txt
+		responseHeaders.set("Content-Disposition",
+				"attachment;filename=" + encordedFilename + ";filename*= UTF-8''" + encordedFilename);
 		responseHeaders.set("Content-Transfer-Encoding", "binary");
 		return new ResponseEntity<InputStreamResource>(getFileContent(filename), responseHeaders, HttpStatus.OK);
 	}
