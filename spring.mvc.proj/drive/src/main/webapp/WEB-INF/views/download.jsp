@@ -15,7 +15,10 @@
 
       	<div class="message">
         	<h1><span class="glyphicon glyphicon-list" aria-hidden="true"></span> <spring:message code="download.title" /></h1>
-        	<p class="lead"><spring:message code="download.message" /></p>
+        	<p>
+        		<span class="lead"><spring:message code="download.message" /></span><br/>
+        		<span><spring:message code="download.notice" /></span>
+        	</p>
       	</div>
       
 		<div class="files">
