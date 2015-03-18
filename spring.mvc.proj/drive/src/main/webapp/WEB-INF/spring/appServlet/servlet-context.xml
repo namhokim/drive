@@ -3,9 +3,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:task="http://www.springframework.org/schema/task"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
@@ -45,6 +47,7 @@
         <beans:property name="maxUploadSize" value="-1"/><!-- no limit -->
         <beans:property name="defaultEncoding" value="UTF-8"/>
     </beans:bean>
+    
     <!-- Configure the file upload directory-->
     <beans:bean id="uploadDirResource" class="org.springframework.core.io.FileSystemResource">
         <beans:constructor-arg>
@@ -53,5 +56,20 @@
     </beans:bean>
     
     <beans:bean id="fileFilter" class="github.namhokim.drive.domain.OnlyFileFilter" />
-	
+    
+    <!-- Spring Scheduler -->
+    <beans:bean id="fileCleanUpTask" class="github.namhokim.drive.service.FileCleanUpTask">
+    	<beans:constructor-arg>
+    		<!-- One Day(5184000000) : 24 * 60 * 60 * 60 * 1000 -->
+            <beans:value>5184000000</beans:value>
+        </beans:constructor-arg>
+    </beans:bean>
+    
+    <task:scheduled-tasks scheduler="cleanUpScheduler">
+    	<!-- One Hour(216000000) : 60 * 60 * 60 * 1000 -->
+        <task:scheduled ref="fileCleanUpTask" method="removeExpiredFiles" fixed-delay="216000000" />
+    </task:scheduled-tasks>
+    
+    <task:scheduler id="cleanUpScheduler"/>
+    
 </beans:beans>

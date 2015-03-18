@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping(value = "/file")
 public class FileDownloadController {
 
-private static final Logger logger = LoggerFactory.getLogger(FileDownloadController.class);
+	private static final Logger logger = LoggerFactory.getLogger(FileDownloadController.class);
 	
 	@Inject
 	private FileSystemResource fsResource;
