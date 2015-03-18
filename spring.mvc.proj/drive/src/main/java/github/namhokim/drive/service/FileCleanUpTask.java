@@ -15,7 +15,7 @@ public class FileCleanUpTask implements FileFilter {
 	
 	private static final Logger logger = LoggerFactory.getLogger(FileCleanUpTask.class);
 
-	private long criticalTime = 10000;
+	private long criticalTime;
 	
 	@Inject
 	private FileSystemResource fsResource;
