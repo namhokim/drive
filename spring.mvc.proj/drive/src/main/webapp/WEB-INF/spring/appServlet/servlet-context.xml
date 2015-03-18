@@ -60,14 +60,14 @@
     <!-- Spring Scheduler -->
     <beans:bean id="fileCleanUpTask" class="github.namhokim.drive.service.FileCleanUpTask">
     	<beans:constructor-arg>
-    		<!-- One Day(5184000000) : 24 * 60 * 60 * 60 * 1000 -->
-            <beans:value>5184000000</beans:value>
+    		<!-- One Day(86400000) : 24 * 3600 * 1000 -->
+            <beans:value>86400000</beans:value>
         </beans:constructor-arg>
     </beans:bean>
     
     <task:scheduled-tasks scheduler="cleanUpScheduler">
-    	<!-- One Hour(216000000) : 60 * 60 * 60 * 1000 -->
-        <task:scheduled ref="fileCleanUpTask" method="removeExpiredFiles" fixed-delay="216000000" />
+    	<!-- One Hour(3600000) : 3600 * 1000 -->
+        <task:scheduled ref="fileCleanUpTask" method="removeExpiredFiles" fixed-delay="3600000" />
     </task:scheduled-tasks>
     
     <task:scheduler id="cleanUpScheduler"/>

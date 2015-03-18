@@ -1,4 +1,5 @@
  [Revision History]
+ 2014-03-18 1.0.6 Auto file clean-up with Spring Scheduler 
  2014-03-09 1.0.5 Firefox filename fix (using filename*= UTF-8'')
  2014-03-06 1.0.4 file handling -> restful unify (/file GET, POST, DELETE), removed console.log 
  2014-03-06 1.0.3 ie6/ie7 partial support
