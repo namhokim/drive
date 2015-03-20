@@ -1,0 +1,79 @@
+package github.namhokim.drive.controller.file;
+
+import static org.junit.Assert.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+import java.io.File;
+
+import github.namhokim.drive.helper.DirectoryHelper;
+
+import javax.inject.Inject;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@WebAppConfiguration
+@ContextConfiguration("../test-servlet-context.xml")
+public class FileRemoveControllerTest {
+
+	@Autowired
+	private WebApplicationContext wac;
+	
+	@Inject
+	private FileSystemResource fsResource;
+	
+	private MockMvc mockMvc;
+	
+	private File testFile;
+
+	@Before
+	public void setUp() throws Exception {
+		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+	}
+	
+	@After
+	public void TearDown() throws Exception {
+		if (testFile !=null) testFile.delete();
+	}
+	
+	@Test
+	public final void testRemove_FileNotExist() throws Exception {
+		// {"success":false,"reason":"File not found"}
+		this.mockMvc.perform(delete("/file").param("filename", "notExist.file"))
+					.andExpect(status().isOk())
+					.andExpect(content().contentType(MediaType.APPLICATION_JSON))
+					.andExpect(jsonPath("$.success").value(false))
+					.andExpect(jsonPath("$.reason").value("File not found"));
+	}
+	
+	@Test
+	public final void testRemove_FileExist() throws Exception {
+		byte[] contentData = new byte[] { 0x20, 0x21, 0x23 };
+		testFile = DirectoryHelper.createTempFile(fsResource.getFile(), "contentTestFile", contentData);
+		
+		assertTrue(testFile.exists());
+
+		// {"success":true,"reason":"Success"}
+		this.mockMvc.perform(delete("/file").param("filename", testFile.getName()))
+					.andExpect(status().isOk())
+					.andExpect(content().contentType(MediaType.APPLICATION_JSON))
+					.andExpect(jsonPath("$.success").value(true))
+					.andExpect(jsonPath("$.reason").value("Success"));
+		
+		assertFalse(testFile.exists());
+	}
+
+}

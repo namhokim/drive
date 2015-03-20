@@ -1,7 +1,6 @@
 <%@ page session="false" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>  
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,11 +19,12 @@
       </div>
       
       <div class="content">
-      	<form:form modelAttribute="uploadItem" class="form-group" method="POST" enctype="multipart/form-data" action="./file">
+      	<form id="uploadItem" class="form-group" method="POST" enctype="multipart/form-data" action="./file">
       		<label for="exampleInputFile"><spring:message code="upload.fileSelect" /> : </label>
-      		<form:input path="fileData" type="file" id="send_file" name="file" size="100" style="width:500px;" />
+      		<input id="send_file" name="fileData" style="width:500px;" name="file" type="file" value="" size="100"/>
 			<button class="btn btn-primary" id="submit_button" type="submit"><spring:message code="upload.send" /></button>
-		</form:form>
+		</form>
+
       </div>
       
 		<div id="dnd" class="row">

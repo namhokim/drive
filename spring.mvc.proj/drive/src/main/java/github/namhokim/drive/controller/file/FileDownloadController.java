@@ -32,15 +32,22 @@ public class FileDownloadController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
-	public ResponseEntity<InputStreamResource> download(HttpServletRequest request, @RequestParam("filename") String filename) throws IOException {
+	public ResponseEntity<InputStreamResource> download(HttpServletRequest request, @RequestParam("filename") String filename) {
 		
 		logger.info("{} download by {}", filename, request.getRemoteAddr());
 		
-		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-		responseHeaders.set("Content-Disposition", getContentDisposition(filename));
-		responseHeaders.set("Content-Transfer-Encoding", "binary");
-		return new ResponseEntity<InputStreamResource>(getFileContent(filename), responseHeaders, HttpStatus.OK);
+		try {
+			InputStreamResource resource = getFileContent(filename);
+			
+			HttpHeaders responseHeaders = new HttpHeaders();
+			responseHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+			responseHeaders.set("Content-Disposition", getContentDisposition(filename));
+			responseHeaders.set("Content-Transfer-Encoding", "binary");
+		return new ResponseEntity<InputStreamResource>(resource, responseHeaders, HttpStatus.OK);
+		} catch (IOException e) {
+			HttpHeaders responseHeaders = new HttpHeaders();
+			return new ResponseEntity<InputStreamResource>(null, responseHeaders, HttpStatus.NOT_FOUND);
+		}
 	}
 	
 	private String getContentDisposition(String filename) throws UnsupportedEncodingException {
