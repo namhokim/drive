@@ -56,9 +56,7 @@ public class FileUploadController {
 
 		try {
 			File lOutFile = new File(fsResource.getPath() + filename);
-			OutputStream destination  = new FileOutputStream(lOutFile);
-			ByteStreams.copy(multiPartFile.getInputStream(), destination);
-			destination.close();
+			multiPartFile.transferTo(lOutFile);
 			logger.info("{} uploaded by {}", filename, remoteAddr);
 			return true;
 		} catch (IOException ie) {
