@@ -19,7 +19,7 @@
       </div>
       
       <div class="content">
-      	<form id="uploadItem" class="form-group" method="POST" enctype="multipart/form-data" action="./file">
+      	<form id="uploadItem" class="form-group" method="POST" enctype="multipart/form-data" action="./file" onSubmit="return onSubmitUploadByPost();">
       		<label for="exampleInputFile"><spring:message code="upload.fileSelect" /> : </label>
       		<input id="send_file" name="fileData" style="width:500px;" name="file" type="file" value="" size="100"/>
 			<button class="btn btn-primary" id="submit_button" type="submit"><spring:message code="upload.send" /></button>
@@ -82,7 +82,13 @@
 			status.setFileNameSize(files[i].name, files[i].size);
 			sendFileToServer(fd, status);
 		}
+		ga('send', 'pageview', '/upload/dragAndDrop/');	// GA
 	}
+    
+    function onSubmitUploadByPost() {
+    	ga('send', 'pageview', '/upload/form/');		// GA
+    	return true;
+    }
 
 	var rowCount=0;
 	

@@ -1,4 +1,5 @@
  [Revision History]
+ 2015-06-22 [1.0.10] GA code start (commonJS.jsp, download.jsp (download event)
  2014-03-20 [1.0.9] HTTP GET /file, not found exception to 404 error
  2014-03-18 [1.0.8] Download > Notice font decrease
  2014-03-18 [1.0.7] Auto file clean-up with Spring Scheduler 

@@ -27,7 +27,7 @@
 				<c:forEach var="listValue" items="${lists}">
 					<li class="list-group-item">
 					<div class="btn-group" role="group" aria-label="file action">
-						<a href="${listValue.name}" class="btn btn-default file download">
+						<a href="${listValue.name}" class="btn btn-default file download" onclick="downloadFile('${listValue.name}');">
 							<span class="glyphicon glyphicon-save" aria-hidden="true"></span>
 							${listValue.name}
 						</a>
@@ -77,8 +77,14 @@
     		var elemList = $(this).offsetParent().offsetParent(); 
     		elemList.css( "background-color", "#C04848" );
     		elemList.fadeOut(1000, function() { $(this).remove(); });
+    		ga('send', 'pageview', '/remove/' + filename);	// GA
     	});
     });
+    
+    function downloadFile(filename) {
+    	ga('send', 'pageview', '/download/' + filename);	// GA
+    	return true;
+    }
     
     function removeFile(filename, succeedHook) {
     	$.ajax({
