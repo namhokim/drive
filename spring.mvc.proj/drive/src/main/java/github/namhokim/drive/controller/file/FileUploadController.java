@@ -1,9 +1,7 @@
 package github.namhokim.drive.controller.file;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -19,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
-
-import com.google.common.io.ByteStreams;
 
 @Controller
 @RequestMapping(value = "/file")
