@@ -38,9 +38,7 @@
     
     <!-- Configure the file upload directory-->
     <beans:bean id="uploadDirResource" class="org.springframework.core.io.FileSystemResource">
-        <beans:constructor-arg>
-            <beans:value>C:/drive/</beans:value>
-        </beans:constructor-arg>
+        <beans:constructor-arg value="/var/tmp/"/>
     </beans:bean>
     
     <beans:bean id="fileFilter" class="github.namhokim.drive.domain.OnlyFileFilter" />
